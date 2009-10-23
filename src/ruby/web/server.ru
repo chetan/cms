@@ -5,8 +5,6 @@
 
 __DIR__ = File.dirname(__FILE__)
 
-require __DIR__ + '/rack'
-
 use Rack::CommonLogger
 use Rack::Static, :urls => ["/css", "/images", "/favicon.ico"], :root => __DIR__ + '/../web'
 use Rack::Reloader
@@ -15,9 +13,11 @@ use Rack::ContentLength
 # setup autoloads
 
 module Pixelcop
+  autoload :Main, "main"
   module Web
-    autoload :Request, "http"
-    autoload :Response, "http"
+    autoload :Application, "web/rack"
+    autoload :Request, "web/http"
+    autoload :Response, "web/http"
   end
 end
 
