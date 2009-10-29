@@ -4,7 +4,7 @@ module Pixelcop
   class Main
     
     CALLERS_TO_IGNORE = [
-      /web\/server.ru/, # all sinatra code
+      /web\/server.ru/,      # all sinatra code
       /\(.*\)/,              # generated code
       /custom_require\.rb$/, # rubygems require hacks
       /active_support/,      # active_support require hacks
