@@ -17,9 +17,13 @@ require 'web'
 
 # load routes - this should be done in some sort of config
 
+Pixelcop::Web::Config.views_path = __DIR__ + "/../app/views"
+
 Pixelcop::Web::Despatcher.controller_path = __DIR__ + "/../app/controller"
 Pixelcop::Web::Despatcher.init()
 
 Pixelcop::Web::Router.map("/", "MyApp::TestController", "index")
+
+Pixelcop::Web::Views # loads view system
 
 run Pixelcop::Web::Application.new

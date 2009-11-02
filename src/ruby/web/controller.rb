@@ -4,8 +4,8 @@ module Pixelcop
         
         class BaseController
             
-            attrib :request
-            attrib :response
+            attr_accessor :request
+            attr_accessor :response
             def_init :request, :response
             
         end # BaseController

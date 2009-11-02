@@ -7,8 +7,7 @@ module MyApp
             
             puts "index.."
             
-            @response.body = "hi index!"
-            
+            render("test.erb")            
         end
         
     end # TestController
