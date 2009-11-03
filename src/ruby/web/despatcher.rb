@@ -8,7 +8,7 @@ module Pixelcop
         
         class << self
             
-            attr_accessor :controller_path
+            attr_accessor :controller_paths # TODO move to Config?
             
             def handle(request)
                 
@@ -27,8 +27,19 @@ module Pixelcop
             end
 
             # find and load controller scripts
-            def init()
-               scan_dir(Dir.new(@controller_path))
+            def init(paths)
+                if @controller_paths.nil? then
+                    @controller_paths = []
+                end
+                return if paths.nil?
+                if paths.kind_of? String
+                    @controller_paths << paths
+                else
+                    @controller_paths += paths
+                end
+                @controller_paths.each { |path|
+                    scan_dir(Dir.new(path))
+                }
             end
             
             def scan_dir(dir)
