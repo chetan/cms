@@ -5,7 +5,6 @@ module Pixelcop
         
             autoload :BaseView, "web/views/base_view"
             autoload :Erb, "web/views/erb"
-            
         
         end # Views
     end # Web
@@ -16,8 +15,39 @@ module Pixelcop
     module Web 
     
         module Views
+            
+            attr_accessor :view_cache
+            
+            def self.included(mod)
+                @@view_cache = {}
+            end
                         
             def render(filename)
+                view = find_cached_view(filename)                
+                view.render(self)
+            end
+            
+            def get_binding
+               return binding 
+            end
+            
+            private
+            
+            def find_cached_view(filename)
+                
+                # check cache
+                if cached = @@view_cache[filename] then
+                    return cached
+                end
+
+                # get new view
+                view = find_view(filename)
+                
+                # cache it 
+                @@view_cache[filename] = view
+            end
+            
+            def find_view(filename)
             
                 if not filename =~ /\.(.*)$/ then
                     # TODO raise error
@@ -29,20 +59,11 @@ module Pixelcop
                 
                     when "erb", "rhtml" then
                         # TODO perf - don't create new objects every time
-                        view = Erb.new(filename)
+                        return Erb.new(filename)
                 
                 end
                 
-                if view.nil? then
-                    # TODO raise error
-                end
-                
-                view.render(self)
-            
-            end
-            
-            def get_binding
-               return binding 
+                # TODO raise error
             end
         
         end # Views
