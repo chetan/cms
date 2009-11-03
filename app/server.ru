@@ -1,9 +1,13 @@
+#\ -p 3000
+
+# #\ -w -p 3000
 
 # rackup configuration
 # configures rack and some basic rack middleware
 # then ties the webserver (any webserver) to our app 
 
-__DIR__ = Dir.pwd + "/" + File.dirname(__FILE__)
+__DIR__ = File.dirname(__FILE__)
+__DIR__ = Dir.pwd + "/" + __DIR__ if __DIR__ !~ %r|^/|
 
 $: << __DIR__ + "/../src/ruby"
 
