@@ -16,9 +16,7 @@ module Pixelcop
     module Web 
     
         module Views
-            
-            attr_accessor :views_path
-            
+                        
             def render(filename)
             
                 if not filename =~ /\.(.*)$/ then
