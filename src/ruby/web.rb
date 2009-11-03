@@ -13,7 +13,7 @@ module Pixelcop
         autoload :Response, "web/http"
     
         # Despatcher, routing
-        autoload :Router, "web/route"
+        autoload :Router, "web/router"
         autoload :Route, "web/route"
         autoload :Despatcher, "web/despatcher"
         autoload :BaseController, "web/controller"
