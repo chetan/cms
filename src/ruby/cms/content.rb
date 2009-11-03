@@ -16,7 +16,7 @@ module Pixelcop
 
             # basic attributes for all content types
 
-            attrib :id, :type, :name, :body, :created_at, :updated_at
+            attrib :id, :type, :name, :body, :created_at, :updated_at, :version
     
             def initialize(args={})
                 return if args.empty?
@@ -28,6 +28,7 @@ module Pixelcop
                         self[name.to_s] = value
                     end
                 end
+                @version = 0
             end
             
             def new?
@@ -70,19 +71,17 @@ module Pixelcop
             end
 
             # can have before_save and after_save methods
+            chainable do
+                def save()
+                    update_timestamps()
+                    @version += 1
+                end
+            end
+            
             def save()
                 raise NotImplementedError
             end
-
-            # override as necessary, but don't forget to call super!
-            def before_save()
-                update_timestamps()
-            end
             
-            # override as necessary
-            def after_save()
-            end            
-  
         end # Content
 
     end # CMS
