@@ -14,16 +14,14 @@ module Pixelcop
                 
                 route, match = Router.select_route(request)
                 if route.nil? then
-                    puts "oh noes, no route :("
+                    # TODO raise error
                 end
-                
-                puts "i has a route!"
-                
+
                 controller = route.clazz.new(request, Response.new)
                 controller.send(route.action)
                 
                 return controller.response
-                                
+
             end
 
             # find and load controller scripts

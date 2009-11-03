@@ -5,31 +5,12 @@ module Pixelcop
     class Application
       
         def call(env)         
-          
-          request = Request.new(env)
-          
-          require 'yaml'
-          puts "call()"
-          
-          #puts @request.to_yaml
-          # puts @request.path
-          # puts @request.fullpath
-          # puts @request["hi"]
       
           begin
-              
+
+              request = Request.new(env)
               response = Despatcher.handle(request)
               return response.finish()
-              
-          
-              # return   [
-              #           200,          # Status code
-              #           {             # Response headers
-              #             'Content-Type' => 'text/html',
-              #             'Content-Length' => '2',
-              #           },
-              #           ['hi']        # Response body
-              #          ]
               
           rescue Object => e
               return [
