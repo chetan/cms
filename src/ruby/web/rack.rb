@@ -1,6 +1,6 @@
 
 module Pixelcop
-  module Web
+    module Web
       
     class Application
       
@@ -23,7 +23,8 @@ module Pixelcop
         end
 
     end # Application
-  end # Rack
+    
+    end # Web
 end # Pixelcop
 
 
