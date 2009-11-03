@@ -53,7 +53,7 @@ module Pixelcop
                 end
 
                 # get new view
-                view = find_view(filename)
+                view = create_view(filename)
                 
                 # cache it 
                 @@view_cache[filename] = view
