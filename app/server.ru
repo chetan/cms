@@ -28,6 +28,6 @@ Pixelcop::Web::Despatcher.init(__DIR__ + "/controller")
 
 Pixelcop::Web::Router.map("/", "MyApp::HelloWorldController", "index")
 
-Pixelcop::Web::Views # loads view system, adds it to the stack
+Pixelcop::Web::CachedViews # loads view system (via autoload), adds it to the stack
 
 run Pixelcop::Web::Application.new

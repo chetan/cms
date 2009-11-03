@@ -20,6 +20,7 @@ module Pixelcop
 
         # Views, templates
         autoload :Views, "web/views"
+        autoload :CachedViews, "web/views/cached_views"
         
     end # Web
     
