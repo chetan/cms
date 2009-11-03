@@ -22,7 +22,7 @@ require 'web'
 Pixelcop::Web::Config.views_path = __DIR__ + "/views"
 Pixelcop::Web::Despatcher.init(__DIR__ + "/controller")
 
-Pixelcop::Web::Router.map("/", "MyApp::TestController", "index")
+Pixelcop::Web::Router.map("/", "MyApp::HelloWorldController", "index")
 
 Pixelcop::Web::Views # loads view system, adds it to the stack
 

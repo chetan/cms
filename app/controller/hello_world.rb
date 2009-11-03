@@ -1,13 +1,10 @@
 
 module MyApp
     
-    class TestController < Pixelcop::Web::BaseController
+    class HelloWorldController < Pixelcop::Web::BaseController
                 
         def index()
-            
-            puts "index.."
-            
-            render("test.erb")            
+            render("hello_world.erb")            
         end
         
     end # TestController
