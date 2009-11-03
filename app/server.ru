@@ -11,7 +11,7 @@ __DIR__ = Dir.pwd + "/" + __DIR__ if __DIR__ !~ %r|^/|
 
 $: << __DIR__ + "/../src/ruby"
 
-use Rack::CommonLogger
+#use Rack::CommonLogger
 use Rack::Static, :urls => ["/css", "/images", "/favicon.ico"], :root => __DIR__ + '/public'
 use Rack::Reloader
 use Rack::ContentLength
