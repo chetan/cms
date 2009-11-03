@@ -8,7 +8,7 @@ module Pixelcop
         autoload :Config, "web/config"
         
         # Basic Rack stuff
-        autoload :Application, "web/rack"
+        autoload :Application, "web/application"
         autoload :Request, "web/http"
         autoload :Response, "web/http"
     
@@ -16,7 +16,7 @@ module Pixelcop
         autoload :Router, "web/router"
         autoload :Route, "web/route"
         autoload :Despatcher, "web/despatcher"
-        autoload :BaseController, "web/controller"
+        autoload :BaseController, "web/base_controller"
 
         # Views, templates
         autoload :Views, "web/views"
