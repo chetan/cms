@@ -1,0 +1,30 @@
+
+INTRO
+
+This is the start of a small CMS and Web framework. The goal is to create 
+programmer-friendly building blocks for creating content-driven websites from
+static websites to dynamic blogs and image galleries. 
+
+
+QUICKSTART
+
+	app/		Test application for the framework
+	docs/		Documentation
+	src/		Framework source code
+
+run the web server:
+	$ app/start.sh
+
+mounts at http://localhost:3000/
+
+
+DEPENDENCIES
+
+cms framework
+- mongodb (server)
+- mongo (client, gem) 
+- mongo_ext (gem, optional)
+
+web framework
+- rack (gem)
+- any web server (mongrel, thin, webrick :p)
