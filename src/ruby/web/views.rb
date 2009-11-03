@@ -15,15 +15,9 @@ module Pixelcop
     module Web 
     
         module Views
-            
-            attr_accessor :view_cache
-            
-            def self.included(mod)
-                @@view_cache = {}
-            end
                         
             def render(filename)
-                view = find_cached_view(filename)                
+                view = create_cached_view(filename)                
                 view.render(self)
             end
             
@@ -33,7 +27,25 @@ module Pixelcop
             
             private
             
-            def find_cached_view(filename)
+            def create_view(filename)
+            
+                if not filename =~ /\.(.*)$/ then
+                    # TODO raise error
+                end
+                ext = $1.downcase
+                
+                view = nil
+                case ext
+                
+                    when "erb", "rhtml" then
+                        return Erb.new(filename)
+                
+                end
+                
+                # TODO raise error
+            end
+            
+            def create_cached_view(filename)
                 
                 # check cache
                 if cached = @@view_cache[filename] then
@@ -47,23 +59,10 @@ module Pixelcop
                 @@view_cache[filename] = view
             end
             
-            def find_view(filename)
+            attr_accessor :view_cache
             
-                if not filename =~ /\.(.*)$/ then
-                    # TODO raise error
-                end
-                ext = $1.downcase
-                
-                view = nil
-                case ext
-                
-                    when "erb", "rhtml" then
-                        # TODO perf - don't create new objects every time
-                        return Erb.new(filename)
-                
-                end
-                
-                # TODO raise error
+            def self.included(mod)
+                @@view_cache = {}
             end
         
         end # Views
