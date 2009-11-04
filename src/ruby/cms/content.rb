@@ -16,9 +16,10 @@ module Pixelcop
 
             # basic attributes for all content types
 
-            attrib :id, :type, :name, :body, :created_at, :updated_at, :version
+            attrib :id, :pretty_id, :type, :name, :body, :created_at, :updated_at, :version
     
             def initialize(args={})
+                @version = 0
                 return if args.empty?
                 args.each_pair do |name, value|
                     writer_method = "#{name}="
@@ -28,7 +29,6 @@ module Pixelcop
                         self[name.to_s] = value
                     end
                 end
-                @version = 0
             end
             
             def new?
@@ -54,20 +54,20 @@ module Pixelcop
             
             # describes the content type
             def self.type
-                raise NotImplementedError
+                # raise NotImplementedError
             end
             
             # same args as self.find(), however returns a single object
             # instead of an array
             def self.load(selector={}, options={})
-                raise NotImplementedError
+                # raise NotImplementedError
             end
             
             # selector is a hash of keys to search/filter by
             # options can be:
             #   limit = <int> (default=20)
             def self.find(selector={}, options={})
-                raise NotImplementedError
+                # raise NotImplementedError
             end
 
             # can have before_save and after_save methods
@@ -79,7 +79,12 @@ module Pixelcop
             end
             
             def save()
-                raise NotImplementedError
+                # raise NotImplementedError
+                super
+            end
+            
+            def delete()
+                
             end
             
         end # Content
