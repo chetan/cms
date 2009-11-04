@@ -35,7 +35,7 @@ class TextContent_Test < Test::Unit::TestCase
         assert_equal(String, obj.id.class)
     end
     
-    def test_load_text
+    def test_load
         obj = Pixelcop::CMS::Text.new({:name => "foo", :body => "blah"})
         obj.save()
         loaded = Pixelcop::CMS::Text.load({ :id => obj.id })
@@ -43,6 +43,27 @@ class TextContent_Test < Test::Unit::TestCase
         assert_equal(String, loaded.id.class)
         assert_equal(obj.id, loaded.id)
         assert_equal("foo", loaded.name)        
+    end
+    
+    def test_load_by_string_id
+        obj = Pixelcop::CMS::Text.new({:name => "foo", :body => "blah"})
+        obj.save()
+        loaded = Pixelcop::CMS::Text.load(obj.id)
+        assert_not_nil(loaded)
+        assert_equal(String, loaded.id.class)
+        assert_equal(obj.id, loaded.id)
+        assert_equal("foo", loaded.name)
+    end
+    
+    def test_delete
+        obj = Pixelcop::CMS::Text.new({:name => "foo", :body => "blah"})
+        obj.save()
+        loaded = Pixelcop::CMS::Text.load({ :id => obj.id })
+        assert_not_nil(loaded)
+        # now try to delete it
+        obj.delete()
+        loaded = Pixelcop::CMS::Text.load({ :id => obj.id })
+        assert_nil(loaded)
     end
     
 end

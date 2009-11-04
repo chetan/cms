@@ -23,6 +23,10 @@ module Pixelcop
                         # set default limit
                         options[:limit] = 20
                     end
+                    if selector.kind_of? String then
+                        # convert String to Hash with id
+                        selector = { :_id => Mongo::ObjectID.from_string(selector) }
+                    end
                     if selector.include? :id then
                         if selector[:id].kind_of? String then
                             selector[:_id] = Mongo::ObjectID.from_string(selector[:id])
@@ -52,6 +56,12 @@ module Pixelcop
                 }
                 id = collection.save(hash)
                 @id = id.to_s
+            end
+            
+            def delete
+                # TODO raise error if new? or @id.nil?
+                selector = { :_id => Mongo::ObjectID.from_string(@id) }
+                collection.remove(selector)
             end
 
             # utils
