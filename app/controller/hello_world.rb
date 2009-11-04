@@ -7,6 +7,6 @@ module MyApp
             render("hello_world.erb")            
         end
         
-    end # TestController
+    end # HelloWorldController
     
 end # end MyApp
