@@ -27,6 +27,9 @@ module Pixelcop
                         if selector[:id].kind_of? String then
                             selector[:_id] = Mongo::ObjectID.from_string(selector[:id])
                             selector.delete(:id)
+                        else
+                            selector[:_id] = selector[:id]
+                            selector.delete(:id)
                         end
                     end
                     results = []
@@ -47,7 +50,8 @@ module Pixelcop
                     next if k.to_s == 'id'
                     hash[k] = read_attr(k)
                 }
-                @id = collection.save(hash)
+                id = collection.save(hash)
+                @id = id.to_s
             end
 
             # utils
@@ -79,6 +83,10 @@ module Pixelcop
             
                 def collection
                    @@collection ||= @@database.collection(collection_name())
+                end
+                
+                def collection=(coll)
+                    @@collection = coll
                 end
             
                 def collection_name
