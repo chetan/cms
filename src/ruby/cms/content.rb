@@ -20,6 +20,7 @@ module Pixelcop
     
             def initialize(args={})
                 @version = 0
+                @type = self.class.type()
                 return if args.empty?
                 args.each_pair do |name, value|
                     writer_method = "#{name}="
@@ -54,7 +55,7 @@ module Pixelcop
             
             # describes the content type
             def self.type
-                # raise NotImplementedError
+                "generic"
             end
             
             # same args as self.find(), however returns a single object

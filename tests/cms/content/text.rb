@@ -64,7 +64,8 @@ class TextContent_Test < Test::Unit::TestCase
         assert_not_nil(loaded)
         assert_equal(String, loaded.id.class)
         assert_equal(obj.id, loaded.id)
-        assert_equal("foo", loaded.name)        
+        assert_equal("foo", loaded.name) 
+        assert_equal("text", loaded.type)
     end
     
     def test_load_by_string_id
