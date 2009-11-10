@@ -20,14 +20,24 @@ use Rack::ContentLength
 
 require 'monkey'
 require 'web'
+require 'cms'
+
+# configure cms
+
+Pixelcop::CMS::MongoBackedContent.connection = Mongo::Connection.new("localhost")
+Pixelcop::CMS::MongoBackedContent.database = 'mycms'
 
 # load routes - this should be done in some sort of config
 
 Pixelcop::Web::Config.views_path = __DIR__ + "/views"
 Pixelcop::Web::Despatcher.init(__DIR__ + "/controller")
 
+Pixelcop::Web::Router.map("/content/update.*", "MyApp::ContentController", "update")
+Pixelcop::Web::Router.map("/content/edit.*", "MyApp::ContentController", "edit")
+Pixelcop::Web::Router.map("/content/.*", "MyApp::ContentController", "index")
+
 Pixelcop::Web::Router.map("/", "MyApp::HelloWorldController", "index")
 
-Pixelcop::Web::CachedViews # loads view system (via autoload), adds it to the stack
+Pixelcop::Web::Views # loads view system (via autoload), adds it to the stack
 
 run Pixelcop::Web::Application.new
