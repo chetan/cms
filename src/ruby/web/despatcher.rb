@@ -1,7 +1,10 @@
 
 module Pixelcop
     module Web
-        
+    
+    # The function of the Despatcher is to find a Route using the Router
+    # and pass the request on to the selected controller & action. 
+    
     class Despatcher    
     
         # class methods / attributes
