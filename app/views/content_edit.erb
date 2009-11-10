@@ -5,11 +5,11 @@
 
 <body>
 	
-	<form method="POST" action="/content/update/<%= @text.id %>">
+	<form method="POST" action="/content/update/<%= @text.id if @text %>">
 	
-	<p><label for="name">name: </label><input type="text" name="name" value="<%= @text.name %>" /></p>
+	<p><label for="name">name: </label><input type="text" name="name" value="<%= @text.name if @text %>" /></p>
 
-    <p><label for="body">body: </label><br /><textarea name="body"><%= @text.body %></textarea></p>
+    <p><label for="body">body: </label><br /><textarea name="body"><%= @text.body if @text %></textarea></p>
 	
 	<p><input type="submit" value="submit" /></p>
 	

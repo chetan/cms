@@ -1,0 +1,25 @@
+<html>
+<head>
+	<title>test page</title>
+</head>
+
+<body>
+	
+	<% if @content_list.empty? then %>
+		<h3>no content to list. why not <a href="/content/create">create some now</a>?</h3>
+
+	<% else %>
+
+		<ul>
+		<% @content_list.each { |content| %>
+			<li><a href="/content/view/<%= content.id %>"><%= content.name %></a></li>
+		<% } %>
+		</ul>
+		
+	<% end %>
+	
+	<hr/>
+	<div>options: <a href="/content/create">create content</a>
+	
+</body>
+</html>

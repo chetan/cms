@@ -34,6 +34,8 @@ Pixelcop::Web::Despatcher.init(__DIR__ + "/controller")
 
 Pixelcop::Web::Router.map("/content/update.*", "MyApp::ContentController", "update")
 Pixelcop::Web::Router.map("/content/edit.*", "MyApp::ContentController", "edit")
+Pixelcop::Web::Router.map("/content/(new|create).*", "MyApp::ContentController", "create")
+Pixelcop::Web::Router.map("/content/view.*", "MyApp::ContentController", "view")
 Pixelcop::Web::Router.map("/content/.*", "MyApp::ContentController", "index")
 
 Pixelcop::Web::Router.map("/", "MyApp::HelloWorldController", "index")
