@@ -35,6 +35,28 @@ class TextContent_Test < Test::Unit::TestCase
         assert_equal(String, obj.id.class)
     end
     
+    def test_update
+        obj = Pixelcop::CMS::Text.new({:name => "foo", :body => "blah"})
+        assert_nil(obj.id)
+        assert(obj.new?)
+        assert_nil(obj.created_at)
+        obj.save()
+        assert_not_nil(obj.id)
+        assert_not_nil(obj.created_at)
+        assert_equal(false, obj.new?)
+        assert_equal(String, obj.id.class)
+        id = obj.id
+        obj.name = "foo2"
+        obj.save()
+        assert_not_nil(obj.id)
+        assert_equal(id, obj.id) # id shouldn't have changed
+        # try reloading it
+        loaded = Pixelcop::CMS::Text.load(id)
+        assert_not_nil(loaded)
+        assert_equal(id, loaded.id)
+        assert_equal("foo2", loaded.name)
+    end
+    
     def test_load
         obj = Pixelcop::CMS::Text.new({:name => "foo", :body => "blah"})
         obj.save()

@@ -51,8 +51,13 @@ module Pixelcop
                 raise "No keys to save!" if not @@keys
                 super
                 @@keys.each { |k|
-                    next if k.to_s == 'id'
-                    hash[k] = read_attr(k)
+                    val = read_attr(k)
+                    next if val.nil?
+                    if k.to_s == 'id' then
+                        hash[:_id] = Mongo::ObjectID.from_string(val)
+                    else
+                        hash[k] = read_attr(k)
+                    end
                 }
                 id = collection.save(hash)
                 @id = id.to_s
@@ -138,5 +143,3 @@ module Pixelcop
         
     end # CMS
 end # Pixelcop
-# ~> -:2:in `require': no such file to load -- mongo (LoadError)
-# ~> 	from -:2
