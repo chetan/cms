@@ -16,7 +16,7 @@ module Pixelcop
 
             # basic attributes for all content types
 
-            attrib :id, :pretty_id, :type, :name, :body, :created_at, :updated_at, :version
+            attr_accessor :id, :pretty_id, :type, :name, :created_at, :updated_at, :version
     
             def initialize(args={})
                 @version = 0

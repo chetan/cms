@@ -5,6 +5,9 @@ module Pixelcop
     module CMS
         
         class Text < MongoBackedContent
+            
+            attr_accessor :body
+            key :body
         
             def self.type
                "text"
