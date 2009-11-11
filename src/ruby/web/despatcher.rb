@@ -15,14 +15,12 @@ module Pixelcop
             
             def handle(request)
                 
-                route, match = Router.select_route(request)
+                route, ret = Router.select_route(request)
                 if route.nil? then
                     # TODO raise error
                 end
 
-                controller = route.clazz.new(request, Response.new)
-                controller.send(route.action)
-                
+                controller = route.handle(request, ret)
                 return controller.response
 
             end

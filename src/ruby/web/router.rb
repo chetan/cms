@@ -6,24 +6,35 @@ module Pixelcop
     
         # class methods / attributes
         
+        @routes = []
+        
         class << self
             
         attr_accessor :routes
         
-        def map(pattern, controller, action)
-            @routes = [] if @routes.nil?
-            @routes << Route.new(pattern, controller, action)
+        def add_route(route)
+            return if route.nil? or not route.kind_of? Route
+            @routes << route
         end
         
-        alias_method :add, :map
-        alias_method :add_route, :map
+        def map(pattern, controller, action)
+            add_route( create_route(pattern, controller, action) )
+        end
+        
+        def create_route(pattern, controller, action)
+            if pattern.kind_of? Regexp then
+                return RegexRoute.new(pattern, controller, action)
+            else
+                return Route.new(pattern, controller, action)
+            end
+        end
     
         def select_route(request)
             match = nil
             @routes.each { |route|
-                match = route.handle? request
-                if not match.nil? then
-                    return route, match
+                ret = route.handle? request
+                if ret then
+                    return route, ret
                 end
             }
         end

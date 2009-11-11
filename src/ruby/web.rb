@@ -15,6 +15,8 @@ module Pixelcop
         # Despatcher, routing
         autoload :Router, "web/router"
         autoload :Route, "web/route"
+        autoload :RegexRoute, "web/controller/regex_route"
+        autoload :PrettyRoute, "web/controller/pretty_route"
         autoload :Despatcher, "web/despatcher"
         autoload :BaseController, "web/base_controller"
 

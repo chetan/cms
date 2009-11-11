@@ -33,13 +33,33 @@ Pixelcop::CMS::MongoBackedContent.database = 'mycms'
 Pixelcop::Web::Config.views_path = __DIR__ + "/views"
 Pixelcop::Web::Despatcher.init(__DIR__ + "/controller")
 
-Pixelcop::Web::Router.map("/content/update.*", "MyApp::ContentController", "update")
-Pixelcop::Web::Router.map("/content/edit.*", "MyApp::ContentController", "edit")
-Pixelcop::Web::Router.map("/content/(new|create).*", "MyApp::ContentController", "create")
-Pixelcop::Web::Router.map("/content/view.*", "MyApp::ContentController", "view")
-Pixelcop::Web::Router.map("/content/.*", "MyApp::ContentController", "index")
+Pixelcop::Web::Router.class_eval do 
+    
+    add_route Pixelcop::Web::PrettyRoute.new("/:controller/:action", "MyApp")
+    
+    
+    # following 5 routes are equivalent to the above route
+    
+    # map %r{^/content/update.*}, "MyApp::ContentController", "update"
+    # map %r{^/content/edit.*}, "MyApp::ContentController", "edit"
+    # map %r{^/content/(new|create).*}, "MyApp::ContentController", "create"
+    # map %r{^/content/view.*}, "MyApp::ContentController", "view"
+    # map %r{^/content/.*}, "MyApp::ContentController", "index"
 
-Pixelcop::Web::Router.map("/", "MyApp::HelloWorldController", "index")
+    map %r{^/}, "MyApp::HelloWorldController", "index"
+    
+end
+
+
+# class MockRequest
+#     attrib :path
+# end
+# req = MockRequest.new("/content/content/view")
+# ret = seg.handle? req
+# seg.handle (req, ret)
+# exit
+
+
 
 Pixelcop::Web::Views # loads view system (via autoload), adds it to the stack
 
