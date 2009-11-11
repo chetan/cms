@@ -5,21 +5,9 @@ module Pixelcop
     class Application
       
         def call(env)         
-      
-          begin
-
-              request = Request.new(env)
-              response = Despatcher.handle(request)
-              return response.finish()
-              
-          rescue Object => e
-              return [
-                  500, 
-                  {Merb::Const::CONTENT_TYPE => Merb::Const::TEXT_SLASH_HTML}, 
-                  e.message + Merb::Const::BREAK_TAG + e.backtrace.join(Merb::Const::BREAK_TAG)
-                  ]
-          end
-          
+            request = Request.new(env)
+            response = Despatcher.handle(request)
+            return response.finish()
         end
 
     end # Application

@@ -15,6 +15,7 @@ $: << __DIR__ + "/../src/ruby"
 use Rack::Static, :urls => ["/css", "/images", "/favicon.ico"], :root => __DIR__ + '/public'
 use Rack::Reloader
 use Rack::ContentLength
+use Rack::ShowExceptions
 
 # setup autoloads
 
