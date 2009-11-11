@@ -78,8 +78,7 @@ module MyApp
             @text.body = @request["body"]
             @text.save
 
-            # TODO redirect
-            render("content.erb")
+            redirect("/content/view/#{@text.id}")
            
         end
         
