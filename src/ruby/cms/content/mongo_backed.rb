@@ -1,16 +1,14 @@
 
-require 'mongo'
+require "mongo"
 
 module Pixelcop
     module CMS
         
-        class MongoBackedContent < Content
-            
-            attr_reader :keys
-
+        module MongoStorage
+           
             # API implementation
             
-            class << self
+            module ClassScope
             
                 def load(selector = {}, options = {})
                     results = find(selector, options)
@@ -44,41 +42,50 @@ module Pixelcop
                     return results
                 end
             
-            end # self
+            end # ClassScope
             
-            def save
-                hash = {}
-                raise "No keys to save!" if not @@keys
-                super
-                @@keys.each { |k|
-                    val = read_attr(k)
-                    next if val.nil?
-                    if k.to_s == 'id' then
-                        hash[:_id] = Mongo::ObjectID.from_string(val)
-                    else
-                        hash[k] = read_attr(k)
-                    end
-                }
-                id = collection.save(hash)
-                @id = id.to_s
-            end
+            # instance methods
             
-            def delete
-                # TODO raise error if new? or @id.nil?
-                selector = { :_id => Mongo::ObjectID.from_string(@id) }
-                collection.remove(selector)
-            end
+            module InstanceScope
+                                
+                def save
+                    hash = {}
+                    raise "No keys to save!" if not keys
+                    super
+                    keys.each { |k|
+                        val = read_attr(k)
+                        next if val.nil?
+                        if k.to_s == 'id' then
+                            hash[:_id] = Mongo::ObjectID.from_string(val)
+                        else
+                            hash[k] = read_attr(k)
+                        end
+                    }
+                    id = collection.save(hash)
+                    @id = id.to_s
+                end
+            
+                def delete
+                    # TODO raise error if new? or @id.nil?
+                    selector = { :_id => Mongo::ObjectID.from_string(@id) }
+                    collection.remove(selector)
+                end
 
-            # utils
+                # accessors for class vars
             
-            def collection
-               self.class.collection() 
-            end
+                def collection
+                   self.class.collection() 
+                end
                 
+                def keys
+                    return self.class.keys()
+                end
                 
+            end # InstanceScope
+                                
             # class methods
             
-            class << self        
+            module ClassScope
             
                 def connection
                     @@connection ||= Mongo::Connection.new
@@ -97,7 +104,7 @@ module Pixelcop
                 end
             
                 def collection
-                   @@collection ||= @@database.collection(collection_name())
+                    @@collection ||= @@database.collection(collection_name())
                 end
                 
                 def collection=(coll)
@@ -114,10 +121,13 @@ module Pixelcop
 
                 # define an attribute as storable
                 def key(*args)
-                    @@keys ||= []
                     args.each { |k|
-                        @@keys << k if not @@keys.include? k
+                        keys << k if not keys.include? k
                     }
+                end
+                
+                def keys
+                    @@keys ||= []
                 end
             
             
@@ -125,7 +135,7 @@ module Pixelcop
             
                 def new_from_mongo(row)
                     obj = new()
-                    @@keys.each { |k|
+                    keys.each { |k|
                         if k == :id then
                             obj.write_attr("id", row["_id"].to_s)
                         else
@@ -135,7 +145,21 @@ module Pixelcop
                     return obj
                 end
             
-            end # self
+            end # ClassScope
+            
+            def self.included(mod)
+                mod.class_eval do
+                    extend ClassScope
+                    include InstanceScope
+                end
+            end
+            
+        end
+        
+        class MongoBackedContent < Content
+
+            include MongoStorage
+            @@collection_name = "content"
             
             key :id, :type, :name, :body, :created_at, :updated_at
             
