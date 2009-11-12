@@ -11,6 +11,8 @@ __DIR__ = Dir.pwd + "/" + __DIR__ if __DIR__ !~ %r|^/|
 
 $: << __DIR__ + "/../src/ruby"
 
+# middleware executes down the stack, then back up again
+
 #use Rack::CommonLogger
 use Rack::Static, :urls => ["/css", "/images", "/favicon.ico"], :root => __DIR__ + '/public'
 use Rack::Reloader
@@ -59,8 +61,7 @@ end
 # seg.handle (req, ret)
 # exit
 
-
-
 Pixelcop::Web::Views # loads view system (via autoload), adds it to the stack
+Pixelcop::Web::Logger
 
 run Pixelcop::Web::Application.new

@@ -24,6 +24,9 @@ module Pixelcop
         autoload :Views, "web/views"
         autoload :CachedViews, "web/views/cached_views"
         
+        # Other
+        autoload :Logger, "web/utils/logger"
+        
     end # Web
     
 end # Pixelcop

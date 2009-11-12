@@ -28,3 +28,4 @@ cms framework
 web framework
 - rack (gem)
 - any web server (mongrel, thin, webrick :p)
+- log4r (gem, optional if using Logger util)
