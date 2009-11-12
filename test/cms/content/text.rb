@@ -1,6 +1,6 @@
 
 require "monkey"
-require "cms/content"
+require "cms"
 require "cms/mongo_setup"
 
 require "test/unit"
@@ -60,7 +60,7 @@ class TextContent_Test < Test::Unit::TestCase
         assert_equal(String, loaded.id.class)
         assert_equal(obj.id, loaded.id)
         assert_equal("foo", loaded.name) 
-        assert_equal("text", loaded.type)
+        assert_equal("Pixelcop::CMS::Text", loaded.type)
     end
     
     def test_load_by_string_id

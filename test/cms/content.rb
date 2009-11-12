@@ -48,15 +48,14 @@ class Content_Test < Test::Unit::TestCase
     end
     
     def test_init
-        obj = DummyContent.new({:type => "foo", :name => "bar"})
-        assert_equal("foo", obj.type)
+        obj = DummyContent.new({:name => "bar"})
         assert_equal("bar", obj.name)
         assert_equal(0, obj.version)
         assert_nil(obj.id)
         
         obj = DummyContent.new
         assert_nil(obj.id)
-        assert_equal("generic", obj.type)
+        assert_equal("DummyContent", obj.type)
         assert_nil(obj.name)
         assert_equal(0, obj.version)
     end

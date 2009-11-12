@@ -1,16 +1,6 @@
 
 module Pixelcop
     module CMS
-
-        autoload :MongoBackedContent, "cms/content/mongo_backed"
-        autoload :Text, "cms/content/text"
-        autoload :HTML, "cms/content/html"
-        
-    end
-end
-
-module Pixelcop
-    module CMS
         
         class Content
 
@@ -20,7 +10,7 @@ module Pixelcop
     
             def initialize(args={})
                 @version = 0
-                @type = self.class.type()
+                @type = self.class.name
                 return if args.empty?
                 args.each_pair do |name, value|
                     writer_method = "#{name}="
@@ -49,14 +39,8 @@ module Pixelcop
             def write_attr(name, val)
                instance_variable_set("@#{name}", val)
             end
-            
-                
+                            
             # api - all content types must implement these methods
-            
-            # describes the content type
-            def self.type
-                "generic"
-            end
             
             # same args as self.find(), however returns a single object
             # instead of an array

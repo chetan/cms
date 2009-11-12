@@ -6,10 +6,6 @@ module Pixelcop
             
             attr_accessor :body
             key :body
-        
-            def self.type
-               "text"
-            end
             
         end # Text
         
