@@ -48,7 +48,7 @@ Pixelcop::Web::Router.class_eval do
     # map %r{^/content/view.*}, "MyApp::ContentController", "view"
     # map %r{^/content/.*}, "MyApp::ContentController", "index"
 
-    map %r{^/}, "MyApp::HelloWorldController", "index"
+    map %r{^/hello}, "MyApp::HelloWorldController", "index"
     
 end
 
