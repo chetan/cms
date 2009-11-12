@@ -1,6 +1,4 @@
 
-require 'cms/storage/mongomapper'
-
 module Pixelcop
     module CMS
         
