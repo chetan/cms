@@ -14,6 +14,8 @@ module Pixelcop
        
         module Logger
         
+            # TODO might be a good idea to be able to get loggers by name here
+            # perhaps some way to set one for different controllers or routes
             def logger
                 @@logger
             end
