@@ -9,7 +9,7 @@
 __DIR__ = File.dirname(__FILE__)
 __DIR__ = Dir.pwd + "/" + __DIR__ if __DIR__ !~ %r|^/|
 
-$: << __DIR__ + "/../src/ruby"
+$: << __DIR__ + "/../lib"
 
 # middleware executes down the stack, then back up again
 
