@@ -1,14 +1,7 @@
 
-__DIR__ = File.dirname(__FILE__)
-__DIR__ = Dir.pwd + "/" + __DIR__ if __DIR__ !~ %r|^/|
-
-#$: << __DIR__ + "/../../../src/ruby"
-
-puts $:.sort
-
 require "monkey"
 require "cms/content"
-require "#{__DIR__}/../mongo_setup.rb"
+require "cms/mongo_setup"
 
 require "test/unit"
 

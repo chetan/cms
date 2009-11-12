@@ -1,12 +1,7 @@
 
-#__DIR__ = File.dirname(__FILE__)
-#__DIR__ = Dir.pwd + "/" + __DIR__ if __DIR__ !~ %r|^/|
-
-#$: << __DIR__ + "/../../src/ruby"
-
 require "monkey"
 require "cms/content"
-#require "test/unit"
+require "test/unit"
 
 class DummyContent < Pixelcop::CMS::Content
     def save()
@@ -61,7 +56,7 @@ class Content_Test < Test::Unit::TestCase
         
         obj = DummyContent.new
         assert_nil(obj.id)
-        assert_nil(obj.type)
+        assert_equal("generic", obj.type)
         assert_nil(obj.name)
         assert_equal(0, obj.version)
     end

@@ -32,10 +32,9 @@ end
 
 desc "Run unit tests"
 Rake::TestTask.new("test") { |t|
-    #t.libs << "tests"
-    t.libs << "src/ruby"
+    t.libs << "test"
     t.ruby_opts << "-rubygems"
-    t.pattern = "tests/**/*.rb"
-    t.verbose = true
+    t.pattern = "test/**/*.rb"
+    t.verbose = false
     t.warning = false
 }
