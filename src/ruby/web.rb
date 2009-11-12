@@ -13,12 +13,12 @@ module Pixelcop
         autoload :Response, "web/http"
     
         # Despatcher, routing
-        autoload :Router, "web/router"
-        autoload :Route, "web/route"
+        autoload :Router, "web/controller/router"
+        autoload :Route, "web/controller/route"
         autoload :RegexRoute, "web/controller/regex_route"
         autoload :PrettyRoute, "web/controller/pretty_route"
-        autoload :Despatcher, "web/despatcher"
-        autoload :BaseController, "web/base_controller"
+        autoload :Despatcher, "web/controller/despatcher"
+        autoload :BaseController, "web/controller/base_controller"
 
         # Views, templates
         autoload :Views, "web/views"
