@@ -1,5 +1,11 @@
 
+require "rubygems"
+
+require "rake"
 require "rake/gempackagetask"
+require "rake/testtask"
+
+
 
 spec = Gem::Specification.new do |s| 
     s.name = "pixelcop_cms"
@@ -23,3 +29,13 @@ end
 Rake::GemPackageTask.new(spec) do |pkg| 
   pkg.need_tar = true 
 end
+
+desc "Run unit tests"
+Rake::TestTask.new("test") { |t|
+    #t.libs << "tests"
+    t.libs << "src/ruby"
+    t.ruby_opts << "-rubygems"
+    t.pattern = "tests/**/*.rb"
+    t.verbose = true
+    t.warning = false
+}

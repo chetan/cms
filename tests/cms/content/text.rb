@@ -2,13 +2,15 @@
 __DIR__ = File.dirname(__FILE__)
 __DIR__ = Dir.pwd + "/" + __DIR__ if __DIR__ !~ %r|^/|
 
-$: << __DIR__ + "/../../../src/ruby"
+#$: << __DIR__ + "/../../../src/ruby"
 
-require 'monkey'
-require 'cms/content'
-require '../mongo_setup'
+puts $:.sort
 
-require 'test/unit'
+require "monkey"
+require "cms/content"
+require "#{__DIR__}/../mongo_setup.rb"
+
+require "test/unit"
 
 class TextContent_Test < Test::Unit::TestCase
     
