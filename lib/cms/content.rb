@@ -31,14 +31,6 @@ module Pixelcop
               write_attr('created_at', now) if new?
               write_attr('updated_at', now)
             end
-            
-            def read_attr(name)
-                instance_variable_get("@#{name}")
-            end
-            
-            def write_attr(name, val)
-               instance_variable_set("@#{name}", val)
-            end
                             
             # api - all content types must implement these methods
             
