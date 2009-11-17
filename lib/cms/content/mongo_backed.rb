@@ -9,7 +9,7 @@ module Pixelcop
             include MongoStorage
             self.collection_name = "content"
 
-            key :id, :type, :name, :body, :created_at, :updated_at
+            key :id, :type, :name, :created_at, :updated_at
 
         end # MongoBackedContent
 
