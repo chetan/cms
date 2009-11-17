@@ -31,7 +31,7 @@ module Pixelcop
             puts match[0]
             classname = match[@controller.pos]
             action = match[@action.pos] || "index"
-            clazz = find_controller(classname)
+            clazz = find_controller(classname, @mod)
             
             puts "found #{clazz}"
             puts "calling #{clazz}.#{action}"
@@ -42,52 +42,15 @@ module Pixelcop
                         
         end
         
-        # override getter
-        def controller
-            con = @@controllers[]
-        end
-        
-        # look for controller class by name
-        def find_controller(name)
-            
-            # look in root scope
-            classname = "::#{name.capitalize}"
-            
-            begin
-                puts "finding #{classname}"
-                return eval(classname)
-            rescue NameError => e
-            end
-            
-            begin
-                puts "finding #{classname}Controller"
-                return eval("#{classname}Controller")
-            rescue NameError => e
-            end
-
-            # try prepending module name
-            classname = "#{@mod}#{classname}"
-            
-            begin
-                puts "finding #{classname}"
-                return eval(classname)
-            rescue NameError => e
-            end
-            
-            begin
-                puts "finding #{classname}Controller"
-                return eval("#{classname}Controller")
-            rescue NameError => e
-            end
-            
-            return nil
-            
-        end
-        
-        # override getter
-        def action
-            
-        end
+        # # override getter
+        # def controller
+        #     con = @@controllers[]
+        # end
+        # 
+        # # override getter
+        # def action
+        #     
+        # end
               
         private
        
