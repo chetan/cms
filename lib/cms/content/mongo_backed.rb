@@ -1,5 +1,5 @@
 
-require "mongo_storage"
+require "cms/content/mongo_storage"
 
 module Pixelcop
     module CMS
