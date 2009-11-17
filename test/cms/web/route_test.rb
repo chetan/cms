@@ -6,9 +6,6 @@ require "web"
 require "cms/mongo_setup"
 require "cms/web/route"
 
-# Pixelcop::Web::Route.connection = Mongo::Connection.new("localhost")
-# Pixelcop::Web::Route.database = 'mycms_tests'
-
 require "test/unit"
 
 class Route_Test < Test::Unit::TestCase
